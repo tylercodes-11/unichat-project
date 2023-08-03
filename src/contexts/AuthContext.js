@@ -9,7 +9,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
     // set up states
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState({}) ;
+    const [user, setUser] = useState(null) ;
     const history = useHistory();
 
     useEffect(() => {
@@ -17,7 +17,8 @@ export const AuthProvider = ({ children }) => {
             // once we get user data, we need to set the user state
             setUser(user);
             setLoading(false);
-            history.push('/chats'); //renavigate to chat app
+
+           if(user) history.push('/chats'); //renavigate to chat app
         }) 
     }, [user, history]);
 
