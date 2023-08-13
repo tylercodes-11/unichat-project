@@ -54,7 +54,7 @@ import { useAuth } from '../contexts/AuthContext';
 
                 axios.post('https://api.chatengine.io/users',
                 formdata,
-                { headers: {"private=key": "495dd4e0-9156-4ad6-80a2-f012c4a560c0"}} //env variable
+                { headers: {"private-key": "495dd4e0-9156-4ad6-80a2-f012c4a560c0"}} //env variable
                 )
                 .then(() => setLoading(false))
                 .catch((error) => console.log(error));
