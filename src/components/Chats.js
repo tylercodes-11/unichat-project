@@ -35,6 +35,7 @@ import { useAuth } from '../contexts/AuthContext';
         axios.get('https://api.chatengine.io/users/me', {
             headers: {
                 "project-id":"0ccedd71-623f-40ee-8aec-178dca89d4c1",
+                "private-key":"495dd4e0-9156-4ad6-80a2-f012c4a560c0",
                 "user-name": user.email,
                 "user-secret": user.uid,
             }
@@ -45,7 +46,7 @@ import { useAuth } from '../contexts/AuthContext';
         .catch(()  => {
             let formdata = new FormData();
             formdata.append('email', user.email);
-            formdata.append('username', user.displayName);
+            formdata.append('username', user.email);
             formdata.append('secret', user.uid);
 
             getFile(user.photoURL)
@@ -54,7 +55,7 @@ import { useAuth } from '../contexts/AuthContext';
 
                 axios.post('https://api.chatengine.io/users',
                 formdata,
-                { headers: {"private-key": "495dd4e0-9156-4ad6-80a2-f012c4a560c0"}} //env variable
+                { headers: { "private-key": "495dd4e0-9156-4ad6-80a2-f012c4a560c0" }} //env variable
                 )
                 .then(() => setLoading(false))
                 .catch((error) => console.log(error));
@@ -70,7 +71,7 @@ import { useAuth } from '../contexts/AuthContext';
                 <div className='logo-tab'>
                     Unichat
                 </div>
-                <div onClick={handleLogout} className='logout-tab'>
+                 <div onClick={handleLogout} className='logout-tab'>
                     Logout
                  </div>
 
@@ -79,8 +80,8 @@ import { useAuth } from '../contexts/AuthContext';
             <ChatEngine
             height="calc(100vh - 66px)"
             projectID="0ccedd71-623f-40ee-8aec-178dca89d4c1"
-            userName="."
-            uesrSecret="."
+            userName={user.email}
+            userSecret={user.uid}
 
             />
         </div>
