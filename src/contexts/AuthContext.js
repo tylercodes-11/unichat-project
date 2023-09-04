@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
             // once we get user data, we need to set the user state
             setUser(user);
             setLoading(false);
-
+            console.log(user);
            if(user) history.push('/chats'); //renavigate to chat app
         }) 
     }, [user, history]);

@@ -34,8 +34,8 @@ import { useAuth } from '../contexts/AuthContext';
 
         axios.get('https://api.chatengine.io/users/me', {
             headers: {
-                "project-id":"0ccedd71-623f-40ee-8aec-178dca89d4c1",
-                "private-key":"495dd4e0-9156-4ad6-80a2-f012c4a560c0",
+                "project-id":process.env.REACT_APP_CHAT_ENGINE_ID,
+                "private-key":process.env.REACT_APP_CHAT_ENGINE_KEY,
                 "user-name": user.email,
                 "user-secret": user.uid,
             }
@@ -55,7 +55,7 @@ import { useAuth } from '../contexts/AuthContext';
 
                 axios.post('https://api.chatengine.io/users',
                 formdata,
-                { headers: { "private-key": "495dd4e0-9156-4ad6-80a2-f012c4a560c0" }} //env variable
+                { headers: { "private-key": process.env.REACT_APP_CHAT_ENGINE_KEY}} //env variable
                 )
                 .then(() => setLoading(false))
                 .catch((error) => console.log(error));
@@ -79,7 +79,7 @@ import { useAuth } from '../contexts/AuthContext';
             
             <ChatEngine
             height="calc(100vh - 66px)"
-            projectID="0ccedd71-623f-40ee-8aec-178dca89d4c1"
+            projectID= {process.env.REACT_APP_CHAT_ENGINE_ID}
             userName={user.email}
             userSecret={user.uid}
 
