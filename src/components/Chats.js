@@ -21,7 +21,6 @@ import { useAuth } from '../contexts/AuthContext';
     const getFile = async (url)  => {
         const response = await fetch(url); 
         const data = await response.blob();
-
         return new File([data], "userPhoto.jpg", { type: 'image/jpeg' });
     }
 
@@ -38,6 +37,8 @@ import { useAuth } from '../contexts/AuthContext';
                 "private-key":process.env.REACT_APP_CHAT_ENGINE_KEY,
                 "user-name": user.email,
                 "user-secret": user.uid,
+                'access-control-allow-origin': 'https://localhost:3000',
+
             }
         })
         .then(() => {
@@ -55,7 +56,9 @@ import { useAuth } from '../contexts/AuthContext';
 
                 axios.post('https://api.chatengine.io/users',
                 formdata,
-                { headers: { "private-key": process.env.REACT_APP_CHAT_ENGINE_KEY}} //env variable
+                { headers: { "private-key": process.env.REACT_APP_CHAT_ENGINE_KEY,
+                            'access-control-allow-origin': 'https://localhost:3000',
+            }} //env variable
                 )
                 .then(() => setLoading(false))
                 .catch((error) => console.log(error));
