@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, {  useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChatEngine } from 'react-chat-engine';
 import { auth } from '../firebase';
 
@@ -8,14 +8,14 @@ import { useAuth } from '../contexts/AuthContext';
 
  const Chats =() => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const { user } = useAuth();
     const [loading, setLoading] = useState(true);
 
     console.log(user);
     const handleLogout = async () => {
         await auth.signOut();
-        history.push('/');
+        navigate.push('/');
     }
 
     const getFile = async (url)  => {
@@ -28,7 +28,7 @@ import { useAuth } from '../contexts/AuthContext';
 
     useEffect(() => {
         if(!user) {
-            history.push('/');
+            navigate.push('/');
             
             return;
         }
@@ -67,7 +67,7 @@ import { useAuth } from '../contexts/AuthContext';
                 .catch((error) => console.log(error));
             })
         });
-    }, [user, history])
+    }, [user, navigate])
 
     if(!user || loading) return 'Loading...';
 
