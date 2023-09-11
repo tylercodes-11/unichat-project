@@ -21,8 +21,10 @@ import { useAuth } from '../contexts/AuthContext';
     const getFile = async (url)  => {
         const response = await fetch(url); 
         const data = await response.blob();
+        
         return new File([data], "userPhoto.jpg", { type: 'image/jpeg' });
     }
+    
 
     useEffect(() => {
         if(!user) {
@@ -33,11 +35,11 @@ import { useAuth } from '../contexts/AuthContext';
 
         axios.get('https://api.chatengine.io/users/me', {
             headers: {
-                "project-id":process.env.REACT_APP_CHAT_ENGINE_ID,
-                "private-key":process.env.REACT_APP_CHAT_ENGINE_KEY,
+                "project-id":'a2f79bb4-8ea1-4aba-85d1-818ef46c586f',
+                "private-key":'81104f82-3965-4c93-ad6d-59cc6b566d9b',
                 "user-name": user.email,
                 "user-secret": user.uid,
-                'access-control-allow-origin': 'https://localhost:3000',
+               
 
             }
         })
@@ -56,8 +58,9 @@ import { useAuth } from '../contexts/AuthContext';
 
                 axios.post('https://api.chatengine.io/users',
                 formdata,
-                { headers: { "private-key": process.env.REACT_APP_CHAT_ENGINE_KEY,
+                { headers: { "private-key": '81104f82-3965-4c93-ad6d-59cc6b566d9b',
                             'access-control-allow-origin': 'https://localhost:3000',
+                            "Access-Control-Allow-Headers": "Origin",
             }} //env variable
                 )
                 .then(() => setLoading(false))
@@ -82,7 +85,7 @@ import { useAuth } from '../contexts/AuthContext';
             
             <ChatEngine
             height="calc(100vh - 66px)"
-            projectID= {process.env.REACT_APP_CHAT_ENGINE_ID}
+            projectID= 'a2f79bb4-8ea1-4aba-85d1-818ef46c586f'
             userName={user.email}
             userSecret={user.uid}
 
